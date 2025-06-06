@@ -1,187 +1,204 @@
-# AI Chat Portal
+# 🏛️ Radically Classical Voice Assistant
 
-Welcome to the AI Chat Portal! This is a simple web application built with Flask that allows users to interact with an AI chatbot, search Google, and get weather information. It includes a user authentication system with login and signup pages, and persists chat histories using MongoDB.
+A unique web-based voice assistant that blends cutting-edge AI capabilities with a timeless, elegant "radically classical" user interface. Speak your commands or questions, and receive spoken and displayed responses, all within a visually refined environment.
 
 ## ✨ Features
 
-* **User Authentication:** Secure login and signup functionalities.
-* **Persistent Chat History:** Your conversations are saved and loaded from MongoDB.
-* **AI Chatbot:** Interact with Google's Gemini 1.5 Flash model.
-* **Weather Tool:** Get current weather for any city.
-* **Google Search Tool:** Quickly perform Google searches directly from the chat.
-* **Responsive Design:** Adapts to different screen sizes.
-* **Radical Dark Theme:** A sleek, cyberpunk-inspired user interface.
+* **Voice Input & Output:** Interact naturally using your voice, with responses spoken back to you.
+* **Dual Display:** Both your spoken question and the assistant's answer are displayed on screen.
+* **Intelligent Q&A:** Powered by Google's Gemini 1.5 Flash model for conversational AI.
+* **System Commands:**
+    * "Open Notepad" / "Close Notepad"
+    * "Open Chrome" / "Close Chrome"
+    * "Open Calculator" / "Close Calculator"
+* **Real-time Information:**
+    * "Current time"
+    * "Current weather in [City Name]" (e.g., "current weather in Guntur")
+* **Web Search:** "Search [your query]" (e.g., "search best frontend frameworks")
+* **"Radically Classical" UI:** A custom CSS design that aims for timeless elegance with subtle, bold twists, focusing on refined typography, harmonious layouts, and thoughtful use of color and space.
+
+## 🎨 Radically Classical Design Philosophy
+
+The aesthetic of this project is inspired by classical art and architecture, emphasizing symmetry, balance, clear hierarchy, and generous whitespace. The "radical" aspect comes from using this traditional foundation as a canvas for unexpected modern elements: perhaps a vibrant accent color within a muted palette, a bold typographic statement, or subtle, fluid animations that enhance the experience without being distracting. The goal is a design that feels both familiar and fresh, sophisticated yet approachable.
 
 ## 🚀 Technologies Used
 
-* **Backend:** Python (Flask)
-* **Database:** MongoDB
-* **AI Model:** Google Gemini 1.5 Flash
-* **External APIs:** OpenWeatherMap API, Google Search (simulated via URL)
-* **Frontend:** HTML, CSS, JavaScript (Fetch API)
-* **Security:** `werkzeug.security` for password hashing, `python-dotenv` for environment variable management.
+### Backend:
 
-## 📋 Prerequisites
+* **Python 3:** The core programming language.
+* **Flask:** A lightweight web framework for the backend server.
+* **Google Generative AI (Gemini 1.5 Flash):** For natural language understanding and response generation.
+* **OpenWeatherMap API:** To fetch real-time weather data.
+* `psutil`, `datetime`, `requests`, `re`, `webbrowser`, `os`: Python libraries for system interactions, time, HTTP requests, regex, and opening web pages.
+* `python-dotenv`: For securely loading API keys from a `.env` file.
 
-Before you begin, ensure you have the following installed on your system:
+### Frontend:
 
-* **Python 3.8+:** You can download it from [python.org](https://www.python.org/downloads/).
-* **Git:** For cloning the repository. Download from [git-scm.com](https://git-scm.com/downloads/).
-* **MongoDB:**
-    * **Local Installation:** Download and install MongoDB Community Server from [mongodb.com](https://www.mongodb.com/try/download/community).
-    * **MongoDB Atlas (Cloud):** Recommended for easier setup and deployment. Create a free cluster at [cloud.mongodb.com](https://cloud.mongodb.com/).
-* **API Keys:**
-    * **Google Gemini API Key:** Obtain one from [Google AI Studio](https://aistudio.google.com/app/apikey).
-    * **OpenWeatherMap API Key:** Register and get your key from [openweathermap.org](https://openweathermap.org/api).
+* **HTML5:** Structure of the web page.
+* **CSS3:** Custom styling for the "radically classical" aesthetic.
+* **JavaScript:**
+    * **Web Speech API:** For Speech-to-Text (Speech Recognition) and Text-to-Speech (Speech Synthesis).
+    * Fetching data from the Flask backend.
 
-## 💻 Getting Started
+## 🛠️ Setup and Installation Guide (For Beginners)
 
-Follow these steps to get the project up and running on your local machine.
+Follow these steps carefully to get the Voice Assistant running on your local machine.
 
-### 1. Clone the Repository
+### 1. Prerequisites
 
-Open your terminal or command prompt and clone the project:
+Before you start, make sure you have the following installed on your computer:
+
+* **Python 3.8 or higher:**
+    * [Download Python](https://www.python.org/downloads/)
+    * *Tip for Windows:* During installation, make sure to check **"Add Python to PATH."**
+* **Git:** For cloning the project from GitHub.
+    * [Download Git](https://git-scm.com/downloads)
+* **A Text Editor / IDE:** Like VS Code, Sublime Text, or PyCharm Community.
+    * [Download VS Code](https://code.visualstudio.com/download)
+
+### 2. Create `requirements.txt`
+
+First, you need to list your project's Python dependencies. Open your terminal or command prompt in your project's root directory (where `app.py` is) and run:
 
 ```bash
-git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
-cd YOUR_REPO_NAME # Replace YOUR_REPO_NAME with the actual repository name you chose
+pip freeze > requirements.txt
 ```
 
-### 2. Set Up a Python Virtual Environment
+### 3. Clone the Repository
 
-It's good practice to use a virtual environment to manage project dependencies.
+Open your terminal or command prompt. Navigate to where you want to save your project (e.g., your Documents or Desktop folder).
 
 ```bash
+cd path/to/your/desired/directory
+```
+Now, clone the project from GitHub:
+
+```bash
+git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+# Replace 'your-username/your-repo-name.git' with the actual link to your repository
+```
+Navigate into the cloned project directory:
+
+```bash
+cd RadicalClassicalVoiceAssistant # Or whatever you named your repository
+```
+
+### 4. Set Up a Virtual Environment
+
+It's best practice to use a virtual environment to manage project dependencies. This keeps your project's libraries separate from your global Python installation.
+
+```bash
+# Create the virtual environment
 python -m venv venv
+
+# Activate the virtual environment
+# On macOS/Linux:
+# source venv/bin/activate
+# On Windows:
+venv\Scripts\activate
 ```
+You'll know it's active when you see `(venv)` at the beginning of your terminal prompt.
 
-### 3. Activate the Virtual Environment
+### 5. Install Dependencies
 
-* **On macOS/Linux:**
-    ```bash
-    source venv/bin/activate
-    ```
-* **On Windows (Command Prompt):**
-    ```bash
-    venv\Scripts\activate.bat
-    ```
-* **On Windows (PowerShell):**
-    ```powershell
-    .\venv\Scripts\Activate.ps1
-    ```
-
-### 4. Create and Configure the .env File
-
-This file stores your sensitive API keys and database connection strings securely.
-
-* Create a new file named `.env` in the root of your project directory (at the same level as `app.py`).
-* Add the following content to `.env`, replacing the placeholder values with your actual keys and connection string:
-
-    ```ini
-    # .env
-
-    # Flask Secret Key (Generate a strong, random key, e.g., using python -c "import os; print(os.urandom(24).hex())")
-    FLASK_SECRET_KEY='your_strong_random_flask_secret_key_here'
-
-    # Google Gemini API Key
-    GEMINI_API_KEY='YOUR_GOOGLE_GEMINI_API_KEY_HERE'
-
-    # OpenWeatherMap API Key
-    OPENWEATHER_API_KEY='YOUR_OPENWEATHERMAP_API_KEY_HERE'
-
-    # MongoDB Connection URI
-    # For local MongoDB: MONGO_URI="mongodb://localhost:27017/"
-    # For MongoDB Atlas (Cloud): MONGO_URI="mongodb+srv://<username>:<password>@cluster0.abcde.mongodb.net/?retryWrites=true&w=majority"
-    MONGO_URI="mongodb://localhost:27017/"
-    ```
-    **Important:** Make sure your `.gitignore` file contains the line `.env` so this file is not committed to GitHub.
-
-### 5. Install Python Dependencies
-
-With your virtual environment activated, install all required libraries:
+With your virtual environment activated, install all the necessary Python libraries:
 
 ```bash
-pip install Flask requests google-generativeai pymongo werkzeug python-dotenv
+pip install -r requirements.txt
 ```
 
-### 6. Run the Flask Application
+### 6. Get Your API Keys
 
-From your project's root directory (where `app.py` is), run the Flask development server:
+This project requires API keys for Google Gemini and OpenWeatherMap.
+
+* **Google Gemini API Key:**
+    * Go to the [Google AI Studio dashboard](https://aistudio.google.com/app/apikey).
+    * Sign in with your Google account.
+    * Click "Create API key in new project" or reuse an existing one.
+    * Copy the generated API key.
+* **OpenWeatherMap API Key:**
+    * Go to [OpenWeatherMap](https://openweathermap.org/api) and sign up for a free account.
+    * Once logged in, go to the "API keys" tab in your profile.
+    * You'll see a default key, or you can generate a new one. Copy this key.
+
+*Note: It might take a few minutes (or sometimes longer) for a new OpenWeatherMap API key to become active.*
+
+### 7. Create the `.env` File
+
+Create a new file named `.env` in the root directory of your project (the same folder where `app.py` is).
+Open `.env` with your text editor and add your API keys like this:
+
+```ini
+GEMINI_API_KEY="YOUR_GEMINI_API_KEY_HERE"
+OPENWEATHER_API_KEY="YOUR_OPENWEATHER_API_KEY_HERE"
+```
+**Important:**
+
+* Replace `"YOUR_GEMINI_API_KEY_HERE"` and `"YOUR_OPENWEATHER_API_KEY_HERE"` with the actual keys you obtained.
+* Do not include spaces around the `=` sign.
+* Never commit your `.env` file to Git! It's already included in your `.gitignore` file to prevent this.
+
+### 8. Run the Flask Application
+
+With your virtual environment still activated, run the Flask application:
 
 ```bash
 python app.py
 ```
-
-You should see output similar to this:
+You should see output similar to this in your terminal:
 
 ```
+ * Serving Flask app 'app'
  * Debug mode: on
- * Running on [http://127.0.0.1:5000/](http://127.0.0.1:5000/) (Press CTRL+C to quit)
- * Restarting with stat
- * Debugger is active!
- * Debugger PIN: XXX-XXX-XXX
+WARNING: This is a development server. Do not use it in a production deployment.
+Use a production WSGI server instead.
+ * Running on [http://127.0.0.1:5000](http://127.0.0.1:5000)
+Press CTRL+C to quit
 ```
 
-### 7. Access the Application
+### 9. Access the Voice Assistant
 
-Open your web browser and navigate to:
+Open your web browser (Chrome, Firefox, Edge, etc.) and go to the following address:
 
 [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
-You will be greeted by the AI Chat Portal landing page.
+You should now see the "Radically Classical Voice Assistant" interface!
 
-## 🚀 Usage
+### 10. Interact with the Assistant
 
-### Landing Page (`/`):
+* Click the "Speak" button.
+* Allow microphone access if prompted by your browser.
+* Speak your question or command (e.g., "Hello", "What is the current time?", "Current weather in Guntur", "Open Notepad", "Search cat videos").
+* Your question and the assistant's answer will appear on the screen, and the assistant will speak its response.
 
-* Click "LOGIN" to go to the login page.
-* Click "SIGNUP" to create a new account.
-* Click "GO TO CHAT" to directly access the chat if you're already logged in (otherwise, it will redirect you to login).
-
-### Signup (`/signup`):
-
-* Enter your email, desired username, and password.
-* Click "REGISTER ACCOUNT". If successful, you'll be redirected to the login page.
-
-### Login (`/login`):
-
-* Enter your registered username and password.
-* Click "INITIATE LOGIN". On successful login, you'll be redirected to the chat page.
-
-### Chat Page (`/chat`):
-
-* **Sidebar:** You'll see a list of your existing chat sessions. Click on a session to load its history.
-* **`+ NEW CHAT` button:** Start a fresh conversation.
-* **Input Field:** Type your message or query.
-* **Action Dropdown:** Select the desired action:
-    * **ASK AI:** Sends your message to the Google Gemini chatbot.
-    * **GET WEATHER:** Type a city name (e.g., "London", "New York") to get its current weather.
-    * **SEARCH GOOGLE:** Type your search query to get a clickable Google search link.
-* **SEND button:** Send your message.
-* **Logout Button:** At the bottom of the sidebar, click "LOGOUT" to end your session.
-
-## 📂 Directory Structure
+## 📂 Project Structure
 
 ```
-my_chat_app/
-├── app.py                 # Main Flask application logic
-├── .env                   # Environment variables (API keys, secret key, DB URI) - IMPORTANT: NOT pushed to Git!
-├── .gitignore             # Tells Git which files/folders to ignore (like .env, venv)
-├── README.md              # This file
-├── templates/             # Flask's default directory for HTML templates
-│   ├── index.html         # Landing page with Login/Signup/Chat buttons
-│   ├── chat.html          # The main AI chat interface
-│   ├── login.html         # User login page
-│   └── signup.html        # User registration page
-└── static/                # Directory for static files like CSS, JavaScript, images
-    ├── style.css          # Main CSS styling for the application
-    ├── style2.css         # An example of an additional stylesheet
-    └── # You can add your own custom CSS files or other static assets here.
+RadicalClassicalVoiceAssistant/
+├── .env                # Stores your API keys (DO NOT commit to Git!)
+├── .gitignore          # Specifies files/folders to ignore in Git
+├── app.py              # Flask backend application
+|
+├── static/             # Static files (CSS, JavaScript, images)
+│   |--style.css        # Custom CSS for the "radically classical" design
+│   │-- script.js        # Frontend JavaScript for voice interaction and API calls  
+│   
+│       
+└── templates/
+    └── index.html      # Frontend HTML structure
 ```
 
-## 🔒 Important Notes
+## 🤝 Contributing
 
-* **Security of API Keys:** Never share your `.env` file or commit it to version control (like GitHub). The `.gitignore` file is configured to prevent this.
-* **Flask Secret Key:** For a production environment, ensure `FLASK_SECRET_KEY` in your `.env` is a very long, random, and complex string.
-* **MongoDB Connection:** Verify your `MONGO_URI` is correct and your MongoDB instance is running before starting the Flask app.
-* **Debugging:** `app.run(debug=True)` is used for development. For production deployment, you should use a production-ready WSGI server like Gunicorn or uWSGI.
+Contributions are welcome! If you have ideas for improvements, new features, or bug fixes, please follow these steps:
+
+1.  Fork the repository.
+2.  Create a new branch (`git checkout -b feature/your-feature-name`).
+3.  Make your changes.
+4.  Commit your changes (`git commit -m 'feat: Add new feature X'`).
+5.  Push to the branch (`git push origin feature/your-feature-name`).
+6.  Create a Pull Request.
+
+## 📄 License
+
+This project is open source and available under the MIT License.
