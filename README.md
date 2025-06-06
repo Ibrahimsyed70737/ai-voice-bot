@@ -1,163 +1,187 @@
-# 🏛️ AI Resume Screening & Candidate Ranking System
+# AI Chat Portal
 
-This is a full-stack web application designed to help recruiters and hiring managers efficiently filter and rank resumes based on a job description. It uses a React frontend for the user interface and a Python Flask backend to handle heavy-lifting tasks like PDF text extraction and resume matching using TF-IDF and Cosine Similarity.
+Welcome to the AI Chat Portal! This is a simple web application built with Flask that allows users to interact with an AI chatbot, search Google, and get weather information. It includes a user authentication system with login and signup pages, and persists chat histories using MongoDB.
 
 ## ✨ Features
 
-* **Job Description Input:** Easily paste or type in the job description for the role.
-* **Multiple Resume Uploads:** Upload one or more PDF resume files.
-* **Automated Text Extraction:** Backend processes PDF files to extract readable text.
-* **Intelligent Matching:** Utilizes TF-IDF (Term Frequency-Inverse Document Frequency) and Cosine Similarity to calculate a relevance score between each resume and the job description.
-* **Ranked Results:** Displays resumes ranked by their match score, helping you identify the most suitable candidates quickly.
-* **User-Friendly Interface:** A clean and responsive React UI for a smooth experience.
+* **User Authentication:** Secure login and signup functionalities.
+* **Persistent Chat History:** Your conversations are saved and loaded from MongoDB.
+* **AI Chatbot:** Interact with Google's Gemini 1.5 Flash model.
+* **Weather Tool:** Get current weather for any city.
+* **Google Search Tool:** Quickly perform Google searches directly from the chat.
+* **Responsive Design:** Adapts to different screen sizes.
+* **Radical Dark Theme:** A sleek, cyberpunk-inspired user interface.
 
 ## 🚀 Technologies Used
 
-### Frontend:
+* **Backend:** Python (Flask)
+* **Database:** MongoDB
+* **AI Model:** Google Gemini 1.5 Flash
+* **External APIs:** OpenWeatherMap API, Google Search (simulated via URL)
+* **Frontend:** HTML, CSS, JavaScript (Fetch API)
+* **Security:** `werkzeug.security` for password hashing, `python-dotenv` for environment variable management.
 
-* **React:** A JavaScript library for building user interfaces.
-* **HTML & CSS:** For structuring and styling the web application.
+## 📋 Prerequisites
 
-### Backend:
+Before you begin, ensure you have the following installed on your system:
 
-* **Python:** The programming language for the backend logic.
-* **Flask:** A lightweight Python web framework for building the API.
-* **Flask-CORS:** For handling Cross-Origin Request Sharing, allowing the frontend to communicate with the backend.
-* **PyPDF2:** A Python library for reading and extracting text from PDF files.
-* **scikit-learn:** A machine learning library for TF-IDF vectorization and Cosine Similarity calculation.
-* **Pandas:** For data manipulation, especially for handling and presenting the results.
+* **Python 3.8+:** You can download it from [python.org](https://www.python.org/downloads/).
+* **Git:** For cloning the repository. Download from [git-scm.com](https://git-scm.com/downloads/).
+* **MongoDB:**
+    * **Local Installation:** Download and install MongoDB Community Server from [mongodb.com](https://www.mongodb.com/try/download/community).
+    * **MongoDB Atlas (Cloud):** Recommended for easier setup and deployment. Create a free cluster at [cloud.mongodb.com](https://cloud.mongodb.com/).
+* **API Keys:**
+    * **Google Gemini API Key:** Obtain one from [Google AI Studio](https://aistudio.google.com/app/apikey).
+    * **OpenWeatherMap API Key:** Register and get your key from [openweathermap.org](https://openweathermap.org/api).
 
-## 📁 Project Structure
+## 💻 Getting Started
 
-The project is organized into two main top-level folders, each containing its own application:
-
-```
-resume-analyzer/
-├── resume-analyzer-backend/   # Python Flask backend
-│   ├── app.py                 # Flask application logic
-│   ├── requirements.txt       # Python dependencies
-│   └── venv/                  # Python Virtual Environment (ignored by Git)
-│   └── ... (other Python files/folders)
-├── resume-analyzer-plain-css/ # React Frontend
-│   ├── public/                # Public assets (e.g., index.html)
-│   ├── src/                   # React source code (App.js, index.js, etc.)
-│   │   ├── App.js             # Main React component
-│   │   └── index.css          # Main CSS file
-│   ├── node_modules/          # Node.js dependencies (ignored by Git)
-│   ├── package.json           # Frontend dependencies and scripts
-│   └── ... (other React/Node files)
-├── .gitignore                 # Specifies files/folders to ignore in Git
-└── README.md                  # This file
-```
-
-## ⚙️ Prerequisites
-
-Before you begin, ensure you have the following software installed on your machine:
-
-* **Git:** For cloning the repository.
-    * [Download Git](https://git-scm.com/downloads)
-* **Node.js & npm (or Yarn):** For running the React frontend. Node.js comes with npm.
-    * **Crucial:** Download the LTS (Long Term Support) version from [nodejs.org](https://nodejs.org/). This ensures compatibility.
-* **Python (3.7+ recommended):** For running the Flask backend.
-    * [Download Python](https://www.python.org/downloads/)
-
-## 🚀 Setup and Installation
-
-Follow these steps carefully to get the application running on your local machine.
+Follow these steps to get the project up and running on your local machine.
 
 ### 1. Clone the Repository
 
-First, clone this entire repository to your local machine:
+Open your terminal or command prompt and clone the project:
 
 ```bash
-git clone [https://github.com/YOUR_GITHUB_USERNAME/resume-analyzer.git](https://github.com/YOUR_GITHUB_USERNAME/resume-analyzer.git)
-cd resume-analyzer
-```
-(Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username.)
-
-### 2. Backend Setup (Python Flask)
-
-Navigate into the backend directory and install its dependencies.
-
-```bash
-cd resume-analyzer-backend
+git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
+cd YOUR_REPO_NAME # Replace YOUR_REPO_NAME with the actual repository name you chose
 ```
 
-#### a. Create and Activate a Python Virtual Environment (Recommended)
+### 2. Set Up a Python Virtual Environment
 
-It's good practice to use a virtual environment to manage dependencies for your Python projects separately.
+It's good practice to use a virtual environment to manage project dependencies.
 
 ```bash
 python -m venv venv
 ```
-* **On Windows:**
-    ```bash
-    .\venv\Scripts\activate
-    ```
+
+### 3. Activate the Virtual Environment
+
 * **On macOS/Linux:**
     ```bash
     source venv/bin/activate
     ```
+* **On Windows (Command Prompt):**
+    ```bash
+    venv\Scripts\activate.bat
+    ```
+* **On Windows (PowerShell):**
+    ```powershell
+    .\venv\Scripts\Activate.ps1
+    ```
 
-#### b. Install Python Dependencies
+### 4. Create and Configure the .env File
+
+This file stores your sensitive API keys and database connection strings securely.
+
+* Create a new file named `.env` in the root of your project directory (at the same level as `app.py`).
+* Add the following content to `.env`, replacing the placeholder values with your actual keys and connection string:
+
+    ```ini
+    # .env
+
+    # Flask Secret Key (Generate a strong, random key, e.g., using python -c "import os; print(os.urandom(24).hex())")
+    FLASK_SECRET_KEY='your_strong_random_flask_secret_key_here'
+
+    # Google Gemini API Key
+    GEMINI_API_KEY='YOUR_GOOGLE_GEMINI_API_KEY_HERE'
+
+    # OpenWeatherMap API Key
+    OPENWEATHER_API_KEY='YOUR_OPENWEATHERMAP_API_KEY_HERE'
+
+    # MongoDB Connection URI
+    # For local MongoDB: MONGO_URI="mongodb://localhost:27017/"
+    # For MongoDB Atlas (Cloud): MONGO_URI="mongodb+srv://<username>:<password>@cluster0.abcde.mongodb.net/?retryWrites=true&w=majority"
+    MONGO_URI="mongodb://localhost:27017/"
+    ```
+    **Important:** Make sure your `.gitignore` file contains the line `.env` so this file is not committed to GitHub.
+
+### 5. Install Python Dependencies
+
+With your virtual environment activated, install all required libraries:
 
 ```bash
-pip install -r requirements.txt
+pip install Flask requests google-generativeai pymongo werkzeug python-dotenv
 ```
-(If `requirements.txt` is missing, you might need to generate it from the original backend project using `pip freeze > requirements.txt` after installing `Flask Flask-CORS PyPDF2 scikit-learn pandas`.)
 
-#### c. Run the Flask Backend Server
+### 6. Run the Flask Application
+
+From your project's root directory (where `app.py` is), run the Flask development server:
 
 ```bash
 python app.py
 ```
-Leave this terminal window open. You should see output indicating that the Flask server is running, typically on `http://127.0.0.1:5000` or `http://localhost:5000`.
 
-### 3. Frontend Setup (React)
+You should see output similar to this:
 
-Open a **NEW** terminal window. Navigate into the frontend directory and install its dependencies.
-
-```bash
-# Assuming you are in the root 'resume-analyzer' folder:
-cd ..
-cd resume-analyzer-plain-css
+```
+ * Debug mode: on
+ * Running on [http://127.0.0.1:5000/](http://127.0.0.1:5000/) (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: XXX-XXX-XXX
 ```
 
-#### a. Install Node.js Dependencies
+### 7. Access the Application
 
-```bash
-npm install
+Open your web browser and navigate to:
+
+[http://127.0.0.1:5000/](http://127.0.0.1:5000/)
+
+You will be greeted by the AI Chat Portal landing page.
+
+## 🚀 Usage
+
+### Landing Page (`/`):
+
+* Click "LOGIN" to go to the login page.
+* Click "SIGNUP" to create a new account.
+* Click "GO TO CHAT" to directly access the chat if you're already logged in (otherwise, it will redirect you to login).
+
+### Signup (`/signup`):
+
+* Enter your email, desired username, and password.
+* Click "REGISTER ACCOUNT". If successful, you'll be redirected to the login page.
+
+### Login (`/login`):
+
+* Enter your registered username and password.
+* Click "INITIATE LOGIN". On successful login, you'll be redirected to the chat page.
+
+### Chat Page (`/chat`):
+
+* **Sidebar:** You'll see a list of your existing chat sessions. Click on a session to load its history.
+* **`+ NEW CHAT` button:** Start a fresh conversation.
+* **Input Field:** Type your message or query.
+* **Action Dropdown:** Select the desired action:
+    * **ASK AI:** Sends your message to the Google Gemini chatbot.
+    * **GET WEATHER:** Type a city name (e.g., "London", "New York") to get its current weather.
+    * **SEARCH GOOGLE:** Type your search query to get a clickable Google search link.
+* **SEND button:** Send your message.
+* **Logout Button:** At the bottom of the sidebar, click "LOGOUT" to end your session.
+
+## 📂 Directory Structure
+
 ```
-This will install all the necessary packages for your React application.
-
-#### b. Run the React Frontend Development Server
-
-```bash
-npm start
+my_chat_app/
+├── app.py                 # Main Flask application logic
+├── .env                   # Environment variables (API keys, secret key, DB URI) - IMPORTANT: NOT pushed to Git!
+├── .gitignore             # Tells Git which files/folders to ignore (like .env, venv)
+├── README.md              # This file
+├── templates/             # Flask's default directory for HTML templates
+│   ├── index.html         # Landing page with Login/Signup/Chat buttons
+│   ├── chat.html          # The main AI chat interface
+│   ├── login.html         # User login page
+│   └── signup.html        # User registration page
+└── static/                # Directory for static files like CSS, JavaScript, images
+    ├── style.css          # Main CSS styling for the application
+    ├── style2.css         # An example of an additional stylesheet
+    └── # You can add your own custom CSS files or other static assets here.
 ```
-Leave this terminal window open. This will compile your React application and typically open it automatically in your default web browser at `http://localhost:3000`. If it doesn't open automatically, manually navigate to this URL in your browser.
 
-## 👨‍💻 Usage
+## 🔒 Important Notes
 
-Once both the backend and frontend servers are running:
-
-1.  Open your web browser and go to `http://localhost:3000`.
-2.  **Enter the Job Description:** Paste or type the job description into the designated text area.
-3.  **Upload Resumes:** Click the "Upload Resumes" button and select one or more PDF files from your computer.
-4.  **Analyze:** Click the "Analyze Resumes" button.
-5.  **View Results:** The application will display a list of uploaded resumes with their calculated match scores (percentage) and indicate whether they are a "match" (score >= 70%).
-
-## ⚠️ Important Notes
-
-* **PDF Parsing:** This application uses `PyPDF2` on the backend for PDF text extraction. While generally effective, the accuracy of text extraction can vary depending on the complexity, formatting, and embedded fonts of the PDF files.
-* **Match Accuracy:** The TF-IDF and Cosine Similarity algorithm is a statistical method for text similarity. Its accuracy depends heavily on the quality of the job description and the content of the resumes.
-* **Local Development:** Both the frontend and backend must be running simultaneously on your local machine for the application to function.
-* **CORS:** The Flask backend is configured with `Flask-CORS` to allow cross-origin requests from the React frontend during development.
-
-## 🤝 Contributing
-
-If you'd like to contribute to this project, feel free to fork the repository, make your changes, and submit a pull request.
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](https://opensource.org/licenses/MIT).
+* **Security of API Keys:** Never share your `.env` file or commit it to version control (like GitHub). The `.gitignore` file is configured to prevent this.
+* **Flask Secret Key:** For a production environment, ensure `FLASK_SECRET_KEY` in your `.env` is a very long, random, and complex string.
+* **MongoDB Connection:** Verify your `MONGO_URI` is correct and your MongoDB instance is running before starting the Flask app.
+* **Debugging:** `app.run(debug=True)` is used for development. For production deployment, you should use a production-ready WSGI server like Gunicorn or uWSGI.
