@@ -1,0 +1,51 @@
+# Python
+# ===============================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Flask-specific
+instance/
+.flaskenv
+
+# Environment variables
+# ===============================
+.env
+.flaskenv
+
+# Node.js (for frontend dependencies if you're using npm/yarn)
+# ===============================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm/
+
+# Build artifacts (common for frontend projects)
+# ===============================
+dist/
+build/
+.parcel-cache/ # If using Parcel bundler
+# You might also have a 'public' or 'output' folder depending on your build setup
+
+# Operating System specific files
+# ===============================
+.DS_Store # macOS
+Thumbs.db # Windows
+ehthumbs.db # Windows
+.directory # Linux
+
+# Editor/IDE specific files
+# ===============================
+.idea/ # IntelliJ IDEA / PyCharm
+.vscode/ # VS Code (unless you want to share specific workspace settings)
+*.swp # Vim swap files
+*~ # Emacs backup files

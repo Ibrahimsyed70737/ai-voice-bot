@@ -1,0 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
+
+:root {
+    --dark-bg: #0a0a1a;
+    --card-bg: #15152a;
+    --neon-blue: #00f0ff; /* Cyber Blue */
+    --neon-magenta: #ff00ff; /* Electric Magenta */
+    --text-primary: #e0e0e0;
+    --text-secondary: #8888aa;
+    --border-color: #333355;
+    --glow-strength: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-magenta);
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    overflow: hidden; /* Hide overflow for background elements */
+    position: relative;
+}
+
+/* Background Grid */
+.background-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(to right, var(--border-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.1;
+    z-index: -2; /* Ensure it's behind other content */
+    animation: grid-pulse 10s infinite alternate;
+}
+
+@keyframes grid-pulse {
+    0% { opacity: 0.05; }
+    100% { opacity: 0.15; }
+}
+
+/* Background Shapes */
+.background-shape {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    opacity: 0.2;
+    filter: blur(80px); /* Soft blur for glowing effect */
+    z-index: -1; /* Behind main content but above grid */
+}
+
+.shape-one {
+    background: var(--neon-blue);
+    top: -100px;
+    left: -100px;
+    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%); /* Hexagonal shape */
+    animation: shape-move-one 20s infinite alternate ease-in-out;
+}
+
+@keyframes shape-move-one {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(50px, 50px) rotate(45deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.shape-two {
+    background: var(--neon-magenta);
+    bottom: -100px;
+    right: -100px;
+    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 75% 100%, 0% 50%); /* Mirrored hexagonal shape */
+    animation: shape-move-two 22s infinite alternate-reverse ease-in-out;
+}
+
+@keyframes shape-move-two {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-50px, -50px) rotate(-45deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Main Card (mapped to .login-box in the original, now .container for our app) */
+.container { /* Renamed from .login-box to .container to match HTML structure */
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.2), 0 0 60px rgba(255, 0, 255, 0.1); /* Neon glow effect */
+    text-align: center;
+    width: 600px; /* Increased width for the middle section */
+    border: 2px solid var(--border-color);
+    position: relative;
+    overflow: hidden; /* Hide content overflowing rounded corners */
+    z-index: 0; /* Ensure it's above background elements */
+    max-width: 95%; /* Increased max-width for responsiveness */
+    min-height: 550px; /* Adjusted min-height for wider layout */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between sections */
+}
+
+.container::before { /* Animated border glow */
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-magenta));
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0.4;
+    animation: border-glow 4s infinite alternate;
+}
+
+@keyframes border-glow {
+    0% { opacity: 0.4; transform: scale(1); }
+    100% { opacity: 0.6; transform: scale(1.02); }
+}
+
+/* Title (mapped to .login-title, now h1 in our HTML) */
+h1 { /* Renamed from .login-title to h1 to match HTML structure */
+    font-family: 'Oxanium', cursive;
+    color: var(--neon-blue);
+    margin-bottom: 35px;
+    font-size: 2.5em;
+    text-shadow: var(--glow-strength); /* Apply neon glow */
+    letter-spacing: 2px;
+    text-transform: uppercase; /* Match original classical style */
+    font-variant: normal; /* Override small-caps for cyberpunk aesthetic */
+}
+
+/* Chat display area (mapped to .results-section for styling inspiration) */
+.chat-display {
+    padding: 25px;
+    background-color: var(--dark-bg); /* Use dark background for chat area */
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.1), 0 0 30px rgba(255, 0, 255, 0.05); /* Subtle neon glow */
+    overflow-y: auto;
+    max-height: 300px; /* Limit height for scrollability */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1; /* Allow chat display to grow */
+    text-align: left; /* Ensure text aligns left */
+}
+
+/* Individual message styling (mapped to .result-item) */
+.message {
+    padding: 15px;
+    border-radius: 8px; /* Slightly larger border-radius for messages */
+    margin-bottom: 10px; /* Space between messages */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s;
+    line-height: 1.5;
+    font-size: 1em; /* Slightly smaller font for messages for a techy feel */
+}
+
+.message:last-child {
+    margin-bottom: 0;
+}
+
+.message.user {
+    background-color: rgba(0, 240, 255, 0.1); /* Light blue tint for user */
+    border-left: 3px solid var(--neon-blue); /* Neon blue accent */
+    text-align: right;
+    margin-left: 10%; /* Adjusted margin for wider display */
+    color: var(--text-primary);
+}
+
+.message.assistant {
+    background-color: rgba(255, 0, 255, 0.1); /* Light magenta tint for assistant */
+    border-right: 3px solid var(--neon-magenta); /* Neon magenta accent */
+    text-align: left;
+    margin-right: 10%; /* Adjusted margin for wider display */
+    color: var(--text-primary);
+}
+
+.message strong {
+    display: block;
+    font-family: 'Oxanium', cursive; /* Use Oxanium for sender names */
+    font-size: 0.9em;
+    color: var(--text-secondary); /* Secondary text color for names */
+    margin-bottom: 5px;
+    text-shadow: 0 0 5px rgba(0, 240, 255, 0.2); /* Subtle glow for names */
+}
+
+/* Input area and button styling */
+.input-area {
+    text-align: center;
+    display: flex; /* Use flexbox for buttons */
+    justify-content: center;
+    gap: 15px; /* Space between buttons */
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    margin-top: 30px; /* Pushed buttons down */
+}
+
+button {
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-magenta));
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4); /* Stronger glow */
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1; /* Allow buttons to grow */
+    max-width: 200px; /* Limit button width */
+}
+
+button::before { /* Hover shimmer effect */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: skewX(-30deg);
+    transition: all 0.4s ease;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
+}
+
+button:disabled {
+    background: #6a6a8a; /* Muted gradient for disabled */
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
+}
+
+button svg {
+    fill: white;
+}
+
+/* Specific styling for the stop speaking button to differentiate it */
+#stop-speaking-btn {
+    background: linear-gradient(45deg, #ff6b6b, #ee2e2e); /* Red/Orange gradient for stop */
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+}
+
+#stop-speaking-btn:hover {
+    background: linear-gradient(45deg, #ee2e2e, #ff6b6b);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+}
+
+/* Status indicator for listening/speaking. */
+#status-indicator {
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+    color: var(--neon-blue); /* Neon blue status text */
+    font-size: 1em;
+    padding: 10px;
+    border: 1px dashed var(--neon-blue); /* Dashed neon border */
+    border-radius: 5px;
+    background-color: rgba(0, 240, 255, 0.05); /* Very subtle blue background */
+    text-shadow: 0 0 5px var(--neon-blue); /* Subtle glow */
+}
+
+/* Utility class to hide elements. */
+.hidden {
+    display: none;
+}
+
+/* Footer styling. */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: var(--text-secondary); /* Secondary text color */
+    text-shadow: 0 0 5px rgba(255, 0, 255, 0.1); /* Subtle magenta glow */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+        width: 90%;
+        min-height: 400px;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    .message.user,
+    .message.assistant {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    button {
+        padding: 12px 25px;
+        font-size: 1em;
+        margin: 5px 0; /* Stack buttons vertically */
+        max-width: 100%; /* Take full width */
+    }
+    .input-area {
+        flex-direction: column; /* Stack buttons on small screens */
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 15px;
+        width: 95%;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    button {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+}
